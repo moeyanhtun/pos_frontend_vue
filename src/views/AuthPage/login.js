@@ -3,20 +3,20 @@ import apiPrefix from "../../apiPrefix.js";
 import useUserStore from "../../store/userStore.js";
 
 export default {
-    name : "Login", 
-    data () {
+    name: "Login",
+    data() {
         return {
-            user : {
-                email : "", 
-                password : "", 
-                error : false, 
-                loading : false
+            user: {
+                email: "",
+                password: "",
+                error: false,
+                loading: false
             }
         }
     },
 
     methods: {
-        login () {
+        login() {
             this.user.error = false;
             this.user.loading = true;
             const formData = new FormData();
@@ -29,12 +29,12 @@ export default {
                 localStorage.setItem('token', response.data.data.token);
                 userStore.setUser(response.data.data.user);
                 console.log('user', userStore.getUser);
-                this.$router.push({ name : "deshboard" });
+                this.$router.push({ name: "deshboard" });
 
             }).catch(err => {
                 console.log(err.message);
                 this.user.error = true;
-            }).finally (() => {
+            }).finally(() => {
                 this.user.loading = false;
             });
         }
